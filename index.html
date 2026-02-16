@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINDGRA Interface Emulator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4416B2; --white: #FFFFFF; --gray: #F2F2F2;
+            --danger: #F35D5D; --success: #2ECC71; --orange: #FF9F43; --blue: #3498DB;
+        }
+        body { background: #2c3e50; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; color: white; }
+        
+        /* Presentation Controls */
+        .controls { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .control-btn { padding: 10px 15px; border-radius: 5px; border: none; cursor: pointer; background: #34495e; color: white; }
+        .control-btn:hover { background: var(--primary); }
+
+        /* iPhone Frame */
+        .iphone-frame {
+            width: 375px; height: 812px; background: #000; border: 12px solid #1a1a1a; 
+            border-radius: 60px; position: relative; overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+        .notch { 
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%); 
+            width: 160px; height: 30px; background: #1a1a1a; border-bottom-left-radius: 20px; 
+            border-bottom-right-radius: 20px; z-index: 100; 
+        }
+
+        /* Screen Container */
+        .screen { width: 100%; height: 100%; display: none; flex-direction: column; background: var(--primary); position: relative; }
+        .screen.active { display: flex; }
+
+        /* UI Elements */
+        .card { background: var(--white); border-radius: 40px 40px 0 0; padding: 40px 25px; margin-top: auto; text-align: center; color: #333; }
+        .heading { font-size: 28px; font-weight: bold; margin-bottom: 20px; }
+        .heading span { color: var(--primary); }
+        .pill-input { width: 100%; padding: 15px 20px; border-radius: 30px; border: 1px solid #ddd; margin-bottom: 12px; box-sizing: border-box; background: var(--gray); }
+        .pill-btn { width: 100%; padding: 18px; border-radius: 35px; border: none; color: white; font-weight: bold; cursor: pointer; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .credits { color: rgba(255,255,255,0.6); font-size: 11px; padding: 15px; text-align: center; }
+        .logo { width: 100px; height: 100px; background: white; border-radius: 20px; margin: 80px auto 20px; display: flex; align-items: center; justify-content: center; font-size: 45px; color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <button class="control-btn" onclick="showScreen('s1')">1. Splash</button>
+        <button class="control-btn" onclick="showScreen('s2')">2. Login</button>
+        <button class="control-btn" onclick="showScreen('s3')">3. Register</button>
+        <button class="control-btn" onclick="showScreen('s4')">4. Home</button>
+        <button class="control-btn" onclick="showScreen('s5')">5. Route</button>
+        <button class="control-btn" onclick="showScreen('s6')">6. Devices</button>
+    </div>
+
+    <div class="iphone-frame">
+        <div class="notch"></div>
+
+        <div id="s1" class="screen active">
+            <div class="logo"><i class="fas fa-map-marker-alt"></i></div>
+            <div style="text-align: center; padding: 20px;">
+                <h1 style="font-size: 36px; margin: 0;">FINDGRA</h1>
+                <p style="opacity: 0.8;">Safety for your loved ones,<br>peace of mind for you.</p>
+            </div>
+            <div class="credits">© 2026 - Nicolas Rendon Arias</div>
+        </div>
+
+        <div id="s2" class="screen">
+            <div class="logo" style="margin-top: 60px;"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="card">
+                <div class="heading">Sign <span>In</span></div>
+                <input type="text" class="pill-input" placeholder="Username">
+                <input type="password" class="pill-input" placeholder="Password">
+                <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Forgot my password</p>
+                <button class="pill-btn" style="background: var(--primary);">Sign In</button>
+                <p style="color: var(--primary); font-weight: bold;">Create account</p>
+            </div>
+            <div class="credits">© 2026 - Nicolas Rendon Arias</div>
+        </div>
+
+        <div id="s3" class="screen">
+            <div class="logo" style="width: 70px; height: 70px; margin: 40px auto 10px;"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="card" style="padding-top: 25px;">
+                <div class="heading">Register <span>User</span></div>
+                <input type="text" class="pill-input" placeholder="Full name">
+                <input type="text" class="pill-input" placeholder="Username">
+                <input type="email" class="pill-input" placeholder="Email">
+                <input type="text" class="pill-input" placeholder="Mobile phone">
+                <input type="text" class="pill-input" placeholder="Home address">
+                <button class="pill-btn" style="background: var(--primary);">Create account</button>
+                <p style="font-size: 11px; color: #888;"><i class="fas fa-check-square"></i> I agree to the processing of personal data.</p>
+            </div>
+            <div class="credits">© 2026 - Nicolas Rendon Arias</div>
+        </div>
+
+        <div id="s4" class="screen">
+            <div style="padding: 40px 25px 20px; display: flex; justify-content: space-between;">
+                <b>FINDGRA</b> <span><i class="fas fa-bars"></i></span>
+            </div>
+            <div class="card" style="height: 100%; border-radius: 40px;">
+                <div class="heading" style="text-align: left;">Welcome, <span>User</span></div>
+                <button class="pill-btn" style="background: var(--blue); justify-content: flex-start; padding-left: 25px;"><i class="fas fa-map-marker-alt"></i> My routes</button>
+                <button class="pill-btn" style="background: var(--orange); justify-content: flex-start; padding-left: 25px;"><i class="fas fa-bell"></i> My reminders</button>
+                <button class="pill-btn" style="background: var(--primary); justify-content: flex-start; padding-left: 25px;"><i class="fas fa-mobile-alt"></i> My devices</button>
+                <button class="pill-btn" style="background: var(--danger); justify-content: flex-start; padding-left: 25px;"><i class="fas fa-plus"></i> Call Emergency Services</button>
+                <button class="pill-btn" style="background: var(--success); justify-content: flex-start; padding-left: 25px;"><i class="fas fa-bullseye"></i> Start route</button>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">v0.1 BETA</p>
+            </div>
+            <div class="credits">© 2026 - Nicolas Rendon Arias</div>
+        </div>
+
+        <div id="s5" class="screen">
+            <div style="padding: 40px 25px 10px;"><b>FINDGRA</b></div>
+            <div class="card" style="height: 100%; border-radius: 40px;">
+                <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px;">
+                    <span>Route name</span> <span style="color: var(--primary);">Time 02:00:15</span>
+                </div>
+                <div style="width: 100%; height: 380px; background: #f0f0f0; border-radius: 20px; margin-bottom: 20px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; color: #999;">
+                    [ Google Maps Placeholder ]
+                </div>
+                <button class="pill-btn" style="background: var(--danger);">End route</button>
+            </div>
+            <div class="credits">© 2026 - Nicolas Rendon Arias</div>
+        </div>
+
+        <div id="s6" class="screen">
+            <div style="padding: 40px 25px 10px;"><b>FINDGRA</b></div>
+            <div class="card" style="height: 100%; border-radius: 40px;">
+                <div class="heading">My <span>Devices</span></div>
+                <div style="text-align: left; border-bottom: 1px solid #eee; padding: 12px 0;">
+                    <b>iPhone 7 Plus</b><br><small style="color: #888;">Registered on 22/12/2022</small>
+                </div>
+                <div style="text-align: left; border-bottom: 1px solid #eee; padding: 12px 0;">
+                    <b>Samsung S22</b><br><small style="color: #888;">Registered on 10/09/2023</small>
+                </div>
+                <div style="text-align: left; border-bottom: 1px solid #eee; padding: 12px 0;">
+                    <b>MacBook Air M2</b><br><small style="color: #888;">Registered on 11/09/2023</small>
+                </div>
+                <button class="pill-btn" style="background: var(--orange); margin-top: 30px;">Edit devices</button>
+            </div>
+            <div class="credits">© 2026 - Nicolas Rendon Arias</div>
+        </div>
+
+    </div>
+
+    <script>
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</body>
+</html>
